@@ -1,0 +1,98 @@
+Last login: Fri Aug 18 15:44:17 on ttys005
+phucnt33@LPP00192074C aws_recoverability % chmod 400 recoverability_secondary_keypair.pem
+phucnt33@LPP00192074C aws_recoverability % ssh -i "recoverability_secondary_keypair.pem" ec2-user@ec2-34-213-23-255.us-west-2.compute.amazonaws.com
+The authenticity of host 'ec2-34-213-23-255.us-west-2.compute.amazonaws.com (34.213.23.255)' can't be established.
+ED25519 key fingerprint is SHA256:e8dmMgkcBtIvo2qf8/kxJsfVY876whAGumFLxUEw2z4.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-34-213-23-255.us-west-2.compute.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-10-2-10-18 ~]$ sudo dnf install mariadb105
+Last metadata expiration check: 0:08:15 ago on Fri Aug 18 23:23:42 2023.
+Dependencies resolved.
+=================================================================================================================================================================================================================
+ Package                                                    Architecture                           Version                                                     Repository                                   Size
+=================================================================================================================================================================================================================
+Installing:
+ mariadb105                                                 x86_64                                 3:10.5.18-1.amzn2023.0.1                                    amazonlinux                                 1.6 M
+Installing dependencies:
+ mariadb-connector-c                                        x86_64                                 3.1.13-1.amzn2023.0.3                                       amazonlinux                                 196 k
+ mariadb-connector-c-config                                 noarch                                 3.1.13-1.amzn2023.0.3                                       amazonlinux                                 9.2 k
+ mariadb105-common                                          x86_64                                 3:10.5.18-1.amzn2023.0.1                                    amazonlinux                                  31 k
+ perl-Sys-Hostname                                          x86_64                                 1.23-477.amzn2023.0.5                                       amazonlinux                                  18 k
+
+Transaction Summary
+=================================================================================================================================================================================================================
+Install  5 Packages
+
+Total download size: 1.8 M
+Installed size: 19 M
+Is this ok [y/N]: y 
+Downloading Packages:
+(1/5): mariadb105-common-10.5.18-1.amzn2023.0.1.x86_64.rpm                                                                                                                       346 kB/s |  31 kB     00:00    
+(2/5): perl-Sys-Hostname-1.23-477.amzn2023.0.5.x86_64.rpm                                                                                                                        197 kB/s |  18 kB     00:00    
+(3/5): mariadb-connector-c-config-3.1.13-1.amzn2023.0.3.noarch.rpm                                                                                                               683 kB/s | 9.2 kB     00:00    
+(4/5): mariadb-connector-c-3.1.13-1.amzn2023.0.3.x86_64.rpm                                                                                                                      2.4 MB/s | 196 kB     00:00    
+(5/5): mariadb105-10.5.18-1.amzn2023.0.1.x86_64.rpm                                                                                                                              6.4 MB/s | 1.6 MB     00:00    
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                            5.8 MB/s | 1.8 MB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                                                                                         1/1 
+  Installing       : mariadb-connector-c-config-3.1.13-1.amzn2023.0.3.noarch                                                                                                                                 1/5 
+  Installing       : mariadb105-common-3:10.5.18-1.amzn2023.0.1.x86_64                                                                                                                                       2/5 
+  Installing       : mariadb-connector-c-3.1.13-1.amzn2023.0.3.x86_64                                                                                                                                        3/5 
+  Installing       : perl-Sys-Hostname-1.23-477.amzn2023.0.5.x86_64                                                                                                                                          4/5 
+  Installing       : mariadb105-3:10.5.18-1.amzn2023.0.1.x86_64                                                                                                                                              5/5 
+  Running scriptlet: mariadb105-3:10.5.18-1.amzn2023.0.1.x86_64                                                                                                                                              5/5 
+  Verifying        : mariadb105-common-3:10.5.18-1.amzn2023.0.1.x86_64                                                                                                                                       1/5 
+  Verifying        : perl-Sys-Hostname-1.23-477.amzn2023.0.5.x86_64                                                                                                                                          2/5 
+  Verifying        : mariadb105-3:10.5.18-1.amzn2023.0.1.x86_64                                                                                                                                              3/5 
+  Verifying        : mariadb-connector-c-3.1.13-1.amzn2023.0.3.x86_64                                                                                                                                        4/5 
+  Verifying        : mariadb-connector-c-config-3.1.13-1.amzn2023.0.3.noarch                                                                                                                                 5/5 
+
+Installed:
+  mariadb-connector-c-3.1.13-1.amzn2023.0.3.x86_64   mariadb-connector-c-config-3.1.13-1.amzn2023.0.3.noarch   mariadb105-3:10.5.18-1.amzn2023.0.1.x86_64   mariadb105-common-3:10.5.18-1.amzn2023.0.1.x86_64  
+  perl-Sys-Hostname-1.23-477.amzn2023.0.5.x86_64    
+
+Complete!
+[ec2-user@ip-10-2-10-18 ~]$ mysql -h database-readreplica.crc3vcpokrlp.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 73
+Server version: 8.0.33 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> use udacity
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> INSERT INTO EMPLOYEES (id, name, email) VALUES(3, "Linh Ha", "ms.hathuylinh@gmail.com");
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement
+MySQL [udacity]> SELECT * FROM EMPLOYEES
+    -> ;
++------+---------------+------------------------------+
+| id   | name          | email                        |
++------+---------------+------------------------------+
+|    1 | PHUC NGUYEN   | mr.nguyentrongphuc@gmail.com |
+|    1 | VICTOR NGUYEN | mr.nguyenanhkhoi@gmail.com   |
++------+---------------+------------------------------+
+2 rows in set (0.001 sec)
+
+MySQL [udacity]> 

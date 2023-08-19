@@ -1,0 +1,44 @@
+Last login: Fri Aug 18 16:20:50 on ttys002
+phucnt33@LPP00192074C aws_recoverability % ssh -i "recoverability_secondary_keypair.pem" ec2-user@ec2-34-213-23-255.us-west-2.compute.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Fri Aug 18 23:30:31 2023 from 172.56.185.249
+[ec2-user@ip-10-2-10-18 ~]$ mysql -h database-readreplica.crc3vcpokrlp.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.33 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> INSERT INTO EMPLOYEES (id, name, email) VALUES(3, "Linh Ha", "ms.hathuylinh@gmail.com");
+ERROR 1046 (3D000): No database selected
+MySQL [(none)]> use udacity
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> INSERT INTO EMPLOYEES (id, name, email) VALUES(3, "Linh Ha", "ms.hathuylinh@gmail.com");
+Query OK, 1 row affected (0.019 sec)
+
+MySQL [udacity]> SELECT * FROM EMPLOYEES;
++------+---------------+------------------------------+
+| id   | name          | email                        |
++------+---------------+------------------------------+
+|    1 | PHUC NGUYEN   | mr.nguyentrongphuc@gmail.com |
+|    1 | VICTOR NGUYEN | mr.nguyenanhkhoi@gmail.com   |
+|    3 | Linh Ha       | ms.hathuylinh@gmail.com      |
++------+---------------+------------------------------+
+3 rows in set (0.001 sec)
+
+MySQL [udacity]> 
