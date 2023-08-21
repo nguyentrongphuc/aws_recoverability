@@ -6,3 +6,5 @@
 2. Region Outage
     In the event of a single region outage, the RTO is will be the time to promote the replica to primary database
     It take about 5 minutes. Read replica is asynchronous cross region so RPO is 10 mins.
+
+
